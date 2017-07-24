@@ -30,6 +30,8 @@ public class BuildHandler : MonoBehaviour {
 	/// </summary>
 	public int cutCountY;
 
+	public Color gizmosGridColor = Color.red;
+
 	// collider attaché sur ce gameobject
 	/// <summary>
 	/// Référence à la composante Collider présente sur ce GameObject.
@@ -574,23 +576,25 @@ public class BuildHandler : MonoBehaviour {
 
 	void OnDrawGizmos ()
 	{
-		if (buildGridShowMod == BuildGridShowMod.Gizmos && Application.isPlaying && myTransform != null)
+		if (buildGridShowMod == BuildGridShowMod.Gizmos)
 		{
+			Transform tr = (Application.isPlaying && myTransform != null)? myTransform: transform;
+
 			Gizmos.color = Color.red;
-			Vector3 bottomLeftCorner = myTransform.position - (colliderSize / 2f);
+			Vector3 bottomLeftCorner = tr.position - (colliderSize / 2f);
 
 			for (int i = 1; i < cutCountX; i++) 
 			{
-				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 (i * snapValues.x, myTransform.position.y + 0.01f, 0f);
-				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (i * snapValues.x, myTransform.position.y + 0.01f, myTransform.position.z + colliderSize.z);
+				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 (i * snapValues.x, tr.position.y + 0.01f, 0f);
+				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (i * snapValues.x, tr.position.y + 0.01f, tr.position.z + colliderSize.z);
 			
 				Gizmos.DrawLine (currentFromPoint, currentLastPoint);
 			}
 
 			for (int i = 1; i < cutCountY; i++) 
 			{
-				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 (0f, myTransform.position.y + 0.01f, i * snapValues.y);
-				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (myTransform.position.x + colliderSize.x, myTransform.position.y + 0.01f, i * snapValues.y);
+				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 (0f, tr.position.y + 0.01f, i * snapValues.y);
+				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (tr.position.x + colliderSize.x, tr.position.y + 0.01f, i * snapValues.y);
 
 				Gizmos.DrawLine (currentFromPoint, currentLastPoint);
 			}
