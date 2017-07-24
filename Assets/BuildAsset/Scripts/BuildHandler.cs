@@ -585,16 +585,17 @@ public class BuildHandler : MonoBehaviour {
 
 			for (int i = 1; i < cutCountX; i++) 
 			{
-				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 (i * snapValues.x, tr.position.y + 0.01f, 0f);
-				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (i * snapValues.x, tr.position.y + 0.01f, tr.position.z + colliderSize.z);
+				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 ((i * snapValues.x), tr.position.y + 0.01f, 0);
+				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 ((i * snapValues.x), tr.position.y + 0.01f, colliderSize.z);
 			
+
 				Gizmos.DrawLine (currentFromPoint, currentLastPoint);
 			}
 
 			for (int i = 1; i < cutCountY; i++) 
 			{
 				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 (0f, tr.position.y + 0.01f, i * snapValues.y);
-				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (tr.position.x + colliderSize.x, tr.position.y + 0.01f, i * snapValues.y);
+				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (colliderSize.x, tr.position.y + 0.01f, i * snapValues.y);
 
 				Gizmos.DrawLine (currentFromPoint, currentLastPoint);
 			}
