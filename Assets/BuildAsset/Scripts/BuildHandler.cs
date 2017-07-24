@@ -6,49 +6,138 @@ using Utility = BuildAsset.BuildUtility;
 using Coord = BuildAsset.Coord;
 
 [RequireComponent (typeof(Collider))]
-public class BuildHandler : MonoBehaviour {
+public class BuildHandler : MonoBehaviour 
+{
+	/// <summary>
+	/// Le type d'affichage de la grille.
+	/// </summary>
+	/// <value>The grid show mod.</value>
+	public BuildGridShowMod GridShowMod 
+	{
+		get
+		{
+			return this.buildGridShowMod;
+		}
+		set
+		{
+			buildGridShowMod = value;
+		}
+	}
 
+	/// <summary>
+	/// Gets or sets a value indicating whether this <see cref="BuildHandler"/> use secure sizes.
+	/// </summary>
+	/// <value><c>true</c> if use secure sizes; otherwise, <c>false</c>.</value>
+	public bool UseSecureSizes
+	{
+		get
+		{
+			return this.useSecureSizes;
+		}
+		set 
+		{
+			useSecureSizes = value;
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the cut count x.
+	/// </summary>
+	/// <value>The cut count x.</value>
+	public int CutCountX 
+	{
+		get 
+		{
+			return this.cutCountX;
+		}
+		set 
+		{
+			cutCountX = value;
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the cut count y.
+	/// </summary>
+	/// <value>The cut count y.</value>
+	public int CutCountY 
+	{
+		get
+		{
+			return this.cutCountY;
+		}
+		set 
+		{
+			cutCountY = value;
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the color of the gizmos grid.
+	/// </summary>
+	/// <value>The color of the gizmos grid.</value>
+	public Color GizmosGridColor
+	{
+		get
+		{
+			return this.gizmosGridColor;
+		}
+		set 
+		{
+			gizmosGridColor = value;
+		}
+	}
+
+	/// <summary>
+	/// Le type d'affichage de la grille.
+	/// </summary>
 	public enum BuildGridShowMod {Gizmos, None};
-	public BuildGridShowMod buildGridShowMod = BuildGridShowMod.None;
+
+	/// <summary>
+	/// Le type d'affichage de la grille.
+	/// </summary>
+	private BuildGridShowMod buildGridShowMod = BuildGridShowMod.None;
 
     [Tooltip ("Renseigne si oui ou non, une vérification doit être effectuée avant la création d'un bâtiment")]
     /// <summary>
     /// Renseigne si oui ou non il faut effectuer une vérification de la taille
     /// du GameObject lors de sa création.
     /// </summary>
-    public bool useSecureSizes = false;
+	private bool useSecureSizes = false;
 
 	[Tooltip ("Number of cut in X-axis")]
 	/// <summary>
 	/// Nombre de colonnes.
 	/// </summary>
-	public int cutCountX;
+	private int cutCountX = 10;
+
 	[Tooltip ("Number of cut in Y-axis")]
-	// nombre de place sur y
 	/// <summary>
 	/// Nombre de lignes.
 	/// </summary>
-	public int cutCountY;
+	private int cutCountY = 10;
 
-	public Color gizmosGridColor = Color.red;
+	/// <summary>
+	/// La couleur de la grille.
+	/// </summary>
+	private Color gizmosGridColor = Color.red;
 
-	// collider attaché sur ce gameobject
 	/// <summary>
 	/// Référence à la composante Collider présente sur ce GameObject.
 	/// </summary>
 	private Collider coll;
-	// taille du collider attaché sur ce gameobject
+
 	/// <summary>
 	/// Représente la taille du Collider dans l'espace 3D.
 	/// </summary>
 	private Vector3 colliderSize;
-	// la valeur du snap
+
 	/// <summary>
 	/// Représente la taille d'une colonnes avec la composante X,
 	/// représente la taille d'une ligne avec la composante Y.
 	/// </summary>
 	private Vector2 snapValues;
-	// offset représente la moitié de snapValues
+
 	/// <summary>
 	/// Représente la moitié de la valeur de snapValues.
 	/// Attention c'est la composante Z qui représente la moitié de la
@@ -56,19 +145,16 @@ public class BuildHandler : MonoBehaviour {
 	/// </summary>
 	private Vector3 offset;
 
-	// represente les batiments présents sur le build handler
 	/// <summary>
 	/// Représente les bâtiments présents sur cette instance BuildHandler.
 	/// </summary>
 	private List<Build> builds = new List<Build> ();
 
-	// reference au transform de cet objet
 	/// <summary>
 	/// Référence à la composante Transform de ce GameObject.
 	/// </summary>
 	private Transform myTransform;
 
-	// reference au batiment qui est en train d'être utilisé
 	/// <summary>
 	/// Représente le bâtiment sur lequel les prochains changement vont être effectués.
 	/// Attention cette référence est là pour ne pas surcharger le GC.
@@ -92,7 +178,6 @@ public class BuildHandler : MonoBehaviour {
 		Initialisation ();
 	}
 
-	// assigne les valeurs utilisées dans cette classe
 	/// <summary>
 	/// Initialise les valeurs utilisées par cette classe.
 	/// </summary>
@@ -113,7 +198,6 @@ public class BuildHandler : MonoBehaviour {
         Debug.Log(this.ToString ());
 	}
 
-	// renvoie la position passée en parametre alignée à la grille
 	/// <summary>
 	/// Renvoie la position passée en paramètre alignée à la grille de cette instance de BuildHandler.
 	/// </summary>
@@ -124,7 +208,6 @@ public class BuildHandler : MonoBehaviour {
 		return BuildUtility.RoundPosition (nonSnapPosition, snapValues);
 	}
 
-	// verfie les positions passé sont occupées
 	/// <summary>
 	/// Détermine si les coordonnées passées en paramètre sont déjà occupées par un autre bâtiment.
 	/// </summary>
@@ -143,7 +226,6 @@ public class BuildHandler : MonoBehaviour {
 		return false;
 	}
 
-	// verfie les positions passé sont occupées
 	/// <summary>
 	/// Détermine si la coordonnée passée en paramètre est déjà occupée par un autre bâtiment.
 	/// </summary>
@@ -154,7 +236,6 @@ public class BuildHandler : MonoBehaviour {
 		return IsOccupiedCoord (location.x, location.y);
 	}
 
-	// verfie les positions passé sont occupées
 	/// <summary>
 	/// Détermine si la coordonnée passée en paramètre est déjà occupée par un autre bâtiment.
 	/// </summary>
@@ -177,7 +258,6 @@ public class BuildHandler : MonoBehaviour {
 		return false;
 	}
 
-	// verfie les positions passé sont occupées
 	/// <summary>
 	/// Détermine si les coordonnées passées en paramètre est déjà occupée par un autre bâtiment, en ne prenant pas en compte certaines autres coordonnées.
 	/// </summary>
@@ -197,7 +277,6 @@ public class BuildHandler : MonoBehaviour {
 		return false;
 	}
 
-	// verifie si les positions passées sont occupées en ignorant certaines positions
 	/// <summary>
 	/// Détermine si la coordonnée passée en paramètre est déjà occupée par un autre bâtiment, en ne prenant pas en compte certaines autres coordonnées.
 	/// </summary>
@@ -232,7 +311,6 @@ public class BuildHandler : MonoBehaviour {
 		return false;
 	}
 
-	// verifie si les positions passées sont dans la grille
 	/// <summary>
 	/// Détermine si les coordonnées passées en paramètre sont dans le Collider de cette instance.
 	/// </summary>
@@ -251,7 +329,6 @@ public class BuildHandler : MonoBehaviour {
 		return true;
 	}
 
-	// verifie si la position passé est dans la grille
 	/// <summary>
 	/// Détermine si la coordonnée passée en paramètre est dans le Collider de cette instance.
 	/// </summary>
@@ -262,7 +339,6 @@ public class BuildHandler : MonoBehaviour {
 		return IsInCellule (location.x, location.y);
 	}
 
-	// verifie si la position passé est dans la grille
 	/// <summary>
 	/// Détermine si la coordonnée passée en paramètre est dans le Collider de cette instance.
 	/// </summary>
@@ -273,8 +349,7 @@ public class BuildHandler : MonoBehaviour {
 	{
 		return (x >= 0 && x < cutCountX) && (y >= 0 && y < cutCountY);
 	}
-
-	// pose un batiment
+		
 	/// <summary>
 	/// Crée un bâtiment sur cette instance du BuildHandler.
 	/// </summary>
@@ -342,7 +417,6 @@ public class BuildHandler : MonoBehaviour {
 		}
 	}
 
-	// tourne un batiment
 	/// <summary>
 	/// Applique une rotation à un bâtiment.
 	/// </summary>
@@ -365,7 +439,6 @@ public class BuildHandler : MonoBehaviour {
 		}
 	}
 
-	// enleve un batiment
 	/// <summary>
 	/// Supprime un bâtiment.
 	/// </summary>
@@ -385,7 +458,6 @@ public class BuildHandler : MonoBehaviour {
 		}
 	}
 		
-	// deplace un bâtiment
 	/// <summary>
 	/// Déplace un bâtiment.
 	/// </summary>
@@ -443,7 +515,6 @@ public class BuildHandler : MonoBehaviour {
 		}
 	}
 
-	// retourne le batiment dont le position du transform correspond à position
 	/// <summary>
 	/// Renvoie le bâtiment correspondant à la position passée en paramètre.
 	/// Utiliser les positions du Transform du bâtiment recherché.
@@ -463,7 +534,6 @@ public class BuildHandler : MonoBehaviour {
 		throw new UnityException ("No build found.");
 	}
 
-	// retourne le batiment dont la position du transform correspond au paramètre position
 	/// <summary>
 	/// Renvoie le bâtiment correspondant à la position passée en paramètre.
 	/// Renvoie également par le biais de la variable index, l'index dans la collection de
@@ -530,7 +600,6 @@ public class BuildHandler : MonoBehaviour {
 		}
 	}
 
-	// renvoie les coordonnées passé en param tourné d'un angle quaterCount * 90
 	/// <summary>
 	/// Renvoie les coordonnées passées en paramètre tourné d'un angle quarterCount * 90.
 	/// </summary>
