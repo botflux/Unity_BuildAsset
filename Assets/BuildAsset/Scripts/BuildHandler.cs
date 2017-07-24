@@ -396,7 +396,7 @@ public class BuildHandler : MonoBehaviour
 			Build instantiatedBuild = buildPool.GetObject (buildToCreate);
 			instantiatedBuild.buildTransform.position = instantiatePosition;
 
-			if (instantiatedBuild.applyBuildHandlerScale)
+			if (instantiatedBuild.ApplyBuildHandlerScale)
 			{
 				// assignation de la taille actuelle qu'a le bâtiment
 				Vector3 currentBuildLocalScale = instantiatedBuild.buildTransform.localScale;

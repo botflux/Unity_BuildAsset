@@ -8,62 +8,54 @@ using Coord = BuildAsset.Coord;
 [RequireComponent (typeof(Collider))]
 public class Build : PooledObject, ICleanup
 {
-	[Tooltip ("Renseigne si oui ou non la taille du bâtiment doit être multipliée par la taille du BuildHandler")]
 	/// <summary>
 	/// Renseigne si oui ou non la taille du bâtiment doit être multipliée par la taille du BuidHandler.
 	/// </summary>
-	public bool applyBuildHandlerScale = false;
+	private bool applyBuildHandlerScale = false;
 
-	[Tooltip ("Renseigne si oui ou non une couleur aléatoire doit être appliquée sur l'instance du bâtiment")]
 	/// <summary>
 	/// Renseigne si oui ou non une couleur aléatoire doit être appliquée sur l'instance du bâtiment.
 	/// </summary>
-	public bool useRandomColor = true;
+	private bool useRandomColor = true;
 
-	// taille du bâtiment
-	// la valeur utilisé par le box collider
-	[Tooltip ("Taille du bâtiment")]
 	/// <summary>
 	/// La taille du collider de ce bâtiment.
 	/// </summary>
-	public Vector3 size;
+	private Vector3 size;
 
-	// position de ce batiement dans la grille
 	/// <summary>
 	/// Coordonnée en X du bâtiment dans sa grille.
 	/// </summary>
 	private int locationX;
-	// position de ce batiment dans la grille
+
 	/// <summary>
 	/// Coordonnée en Y du bâtiment dans sa grille.
 	/// </summary>
 	private int locationY;
-	// nombre de colonne occupé par ce batiement
+
 	/// <summary>
 	/// Le nombre de colonnes occupées par le bâtiment.
 	/// </summary>
 	private int sizeX;
-	// nombre de ligne occupé par ce batiement
+
 	/// <summary>
 	/// Le nombre de lignes occupées par le bâtiment.
 	/// </summary>
 	private int sizeY;
-	// transform de ce batiment
+
 	[HideInInspector]
 	/// <summary>
 	/// Référence au Transform du bâtiment.
 	/// </summary>
 	public Transform buildTransform;
+
 	[HideInInspector]
-	// representation dans l'espace du point locationX et locationY.
-	// sert d'axe de rotation lors des rotations sur un bâtiment
 	/// <summary>
 	/// Origine du bâtiment.
 	/// </summary>
 	private Vector3 origin;
 
 	[HideInInspector]
-	// coordonnées dans la grille occupé par ce batiement
 	/// <summary>
 	/// Coordonnées occupées par le bâtiment dans sa grille.
 	/// </summary>
@@ -79,6 +71,10 @@ public class Build : PooledObject, ICleanup
 		{
 			return this.locationX;
 		}
+		set
+		{
+			this.locationX = value;
+		}
 	}
 
 	/// <summary>
@@ -90,6 +86,10 @@ public class Build : PooledObject, ICleanup
 		get
 		{
 			return this.locationY;
+		}
+		set
+		{
+			this.locationY = value;
 		}
 	}
 
@@ -103,6 +103,10 @@ public class Build : PooledObject, ICleanup
 		{
 			return this.sizeX;
 		}
+		set
+		{
+			this.sizeX = value;
+		}
 	}
 
 	/// <summary>
@@ -114,6 +118,10 @@ public class Build : PooledObject, ICleanup
 		get 
 		{
 			return this.sizeY;
+		}
+		set
+		{
+			this.sizeY = value;
 		}
 	}
 
@@ -127,15 +135,59 @@ public class Build : PooledObject, ICleanup
 		{
 			return this.origin;
 		}
+		set
+		{
+			this.origin = value;
+		}
 	}
 
+	/// <summary>
+	/// Gets or sets the size.
+	/// </summary>
+	/// <value>The size.</value>
     public Vector3 Size
     {
         get
         {
             return this.size;
         }
+		set
+		{
+			this.size = value;
+		}
     }
+
+	/// <summary>
+	/// Gets or sets a value indicating whether this <see cref="Build"/> apply build handler scale.
+	/// </summary>
+	/// <value><c>true</c> if apply build handler scale; otherwise, <c>false</c>.</value>
+	public bool ApplyBuildHandlerScale
+	{
+		get 
+		{
+			return this.applyBuildHandlerScale;
+		}
+		set 
+		{
+			applyBuildHandlerScale = value;
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets a value indicating whether this <see cref="Build"/> use random color.
+	/// </summary>
+	/// <value><c>true</c> if use random color; otherwise, <c>false</c>.</value>
+	public bool UseRandomColor
+	{
+		get
+		{
+			return this.useRandomColor;
+		}
+		set
+		{
+			useRandomColor = value;
+		}
+	}
 
 	void Awake ()
 	{
