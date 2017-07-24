@@ -580,7 +580,7 @@ public class BuildHandler : MonoBehaviour {
 		{
 			Transform tr = (Application.isPlaying && myTransform != null)? myTransform: transform;
 
-			Gizmos.color = Color.red;
+			Gizmos.color = this.gizmosGridColor;
 			Vector3 bottomLeftCorner = tr.position - (colliderSize / 2f);
 
 			for (int i = 1; i < cutCountX; i++) 
