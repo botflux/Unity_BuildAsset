@@ -5,9 +5,9 @@ using UnityEngine;
 public class Pool <T> where T : PooledObject, ICleanup
 {
 	// les objects en attentes
-	private List<T> pool = new List<T>();
+	private List<T> pool;
 	// contient les reference au prefab avec leur id de prefab 
-	private List<KeyValuePair<int, T>> knowsObjects = new List<KeyValuePair<int, T>> ();
+	private List<KeyValuePair<int, T>> knowsObjects;
 
 	private int greaterCount = 0;
 
@@ -33,6 +33,13 @@ public class Pool <T> where T : PooledObject, ICleanup
 		{
 			return this.greaterCount;
 		}
+	}
+
+	public Pool ()
+	{
+		pool = new List<T>();
+		knowsObjects = new List<KeyValuePair<int, T>> ();
+		Debug.Log ("Pool instantiated");
 	}
 
 	public bool IsInPool (T prefab)
