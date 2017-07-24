@@ -44,15 +44,15 @@ public class BuildHandler : MonoBehaviour
 	/// Gets or sets the cut count x.
 	/// </summary>
 	/// <value>The cut count x.</value>
-	public int CutCountX 
+	public int SpacingCountX 
 	{
 		get 
 		{
-			return this.cutCountX;
+			return this.spacingCountX;
 		}
 		set 
 		{
-			cutCountX = value;
+			spacingCountX = value;
 		}
 	}
 
@@ -60,15 +60,15 @@ public class BuildHandler : MonoBehaviour
 	/// Gets or sets the cut count y.
 	/// </summary>
 	/// <value>The cut count y.</value>
-	public int CutCountY 
+	public int SpacingCountY 
 	{
 		get
 		{
-			return this.cutCountY;
+			return this.spacingCountY;
 		}
 		set 
 		{
-			cutCountY = value;
+			spacingCountY = value;
 		}
 	}
 
@@ -109,13 +109,13 @@ public class BuildHandler : MonoBehaviour
 	/// <summary>
 	/// Nombre de colonnes.
 	/// </summary>
-	private int cutCountX = 10;
+	private int spacingCountX = 10;
 
 	[Tooltip ("Number of cut in Y-axis")]
 	/// <summary>
 	/// Nombre de lignes.
 	/// </summary>
-	private int cutCountY = 10;
+	private int spacingCountY = 10;
 
 	/// <summary>
 	/// La couleur de la grille.
@@ -185,7 +185,7 @@ public class BuildHandler : MonoBehaviour
 	{
 		myTransform = transform;
 		colliderSize = coll.bounds.size;
-		snapValues = new Vector2 (colliderSize.x / (float)cutCountX, colliderSize.z / (float)cutCountY);
+		snapValues = new Vector2 (colliderSize.x / (float)spacingCountX, colliderSize.z / (float)spacingCountY);
 		offset = new Vector3 (snapValues.x / 2f, 0f, snapValues.y / 2f);
 
 		buildPool = GameManager.instance.buildPool;
@@ -347,7 +347,7 @@ public class BuildHandler : MonoBehaviour
 	/// <param name="y">La composante Y de la coordonnée.</param>
 	bool IsInCellule (int x, int y)
 	{
-		return (x >= 0 && x < cutCountX) && (y >= 0 && y < cutCountY);
+		return (x >= 0 && x < spacingCountX) && (y >= 0 && y < spacingCountY);
 	}
 		
 	/// <summary>
@@ -367,9 +367,9 @@ public class BuildHandler : MonoBehaviour
 		// index en x du batiment
 		// on divise la position local par la valeur du snap pour avoir un index allant de -cutCount / 2 jusqua cutCount / 2 - 1.
 		// et le cutCount est la pour decaler l'index afin d'obtenir un index allant de 0 à cutCount.
-		int locX = Mathf.RoundToInt(localSnappedPosition.x / snapValues.x) + (cutCountX / 2);
+		int locX = Mathf.RoundToInt(localSnappedPosition.x / snapValues.x) + (spacingCountX / 2);
 		// index en y du batiment
-		int locZ = Mathf.RoundToInt(localSnappedPosition.z / snapValues.y) + (cutCountY / 2);
+		int locZ = Mathf.RoundToInt(localSnappedPosition.z / snapValues.y) + (spacingCountY / 2);
 
 		int sizeX = Mathf.RoundToInt (buildToCreate.Size.x / snapValues.x);
 		int sizeY = Mathf.RoundToInt (buildToCreate.Size.z / snapValues.y);
@@ -486,10 +486,10 @@ public class BuildHandler : MonoBehaviour
 				Vector3 newTransformPosition = new Vector3 (currentUsedBuild.buildTransform.position.x + deltaOrigins.x, currentUsedBuild.buildTransform.position.y, currentUsedBuild.buildTransform.position.z + deltaOrigins.z);
 
 				// index en x du batiment
-				int locX = Mathf.RoundToInt(localSnappedPosition.x / snapValues.x) + (cutCountX / 2);
+				int locX = Mathf.RoundToInt(localSnappedPosition.x / snapValues.x) + (spacingCountX / 2);
 
 				// index en y du batiment
-				int locZ = Mathf.RoundToInt(localSnappedPosition.z / snapValues.y) + (cutCountY / 2);
+				int locZ = Mathf.RoundToInt(localSnappedPosition.z / snapValues.y) + (spacingCountY / 2);
 
 				// le decalage entre le nouveau locationX et l'ancien
 				int deltaLocationX = locX - currentUsedBuild.LocationX;
@@ -632,14 +632,14 @@ public class BuildHandler : MonoBehaviour
 
 	void OnValidate ()
 	{
-		if (cutCountX <= 0)
+		if (spacingCountX <= 0)
 		{
-			cutCountX = 1;
+			spacingCountX = 1;
 		}
 
-		if (cutCountY <= 0)
+		if (spacingCountY <= 0)
 		{
-			cutCountY = 1;
+			spacingCountY = 1;
 		}
 	}
 
@@ -652,7 +652,7 @@ public class BuildHandler : MonoBehaviour
 			Gizmos.color = this.gizmosGridColor;
 			Vector3 bottomLeftCorner = tr.position - (colliderSize / 2f);
 
-			for (int i = 1; i < cutCountX; i++) 
+			for (int i = 1; i < spacingCountX; i++) 
 			{
 				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 ((i * snapValues.x), tr.position.y + 0.01f, 0);
 				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 ((i * snapValues.x), tr.position.y + 0.01f, colliderSize.z);
@@ -661,7 +661,7 @@ public class BuildHandler : MonoBehaviour
 				Gizmos.DrawLine (currentFromPoint, currentLastPoint);
 			}
 
-			for (int i = 1; i < cutCountY; i++) 
+			for (int i = 1; i < spacingCountY; i++) 
 			{
 				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 (0f, tr.position.y + 0.01f, i * snapValues.y);
 				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (colliderSize.x, tr.position.y + 0.01f, i * snapValues.y);
@@ -673,7 +673,7 @@ public class BuildHandler : MonoBehaviour
 
     public override string ToString()
     {
-        return string.Format("Collider size : {0}; Snap values: {1}; Cut count x-axis: {2}; Cut count y-axis: {3};", colliderSize, snapValues, cutCountX, cutCountY);    
+        return string.Format("Collider size : {0}; Snap values: {1}; Cut count x-axis: {2}; Cut count y-axis: {3};", colliderSize, snapValues, spacingCountX, spacingCountY);    
     }
 }
 
