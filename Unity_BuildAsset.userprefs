@@ -2,8 +2,10 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\BuildAsset\Scripts\BuildHandler.cs">
     <Files>
-      <File FileName="Assets\BuildAsset\Scripts\BuildHandler.cs" Line="626" Column="3" />
-      <File FileName="Assets\BuildAsset\Editor\BuildHandlerEditor.cs" Line="22" Column="96" />
+      <File FileName="Assets\BuildAsset\Scripts\BuildHandler.cs" Line="124" Column="18" />
+      <File FileName="Assets\BuildAsset\Editor\BuildHandlerEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\BuildAsset\Scripts\Build.cs" Line="1" Column="1" />
+      <File FileName="Assets\BuildAsset\Editor\BuildEditor.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

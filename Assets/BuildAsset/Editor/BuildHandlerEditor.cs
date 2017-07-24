@@ -8,6 +8,9 @@ public class BuildHandlerEditor : Editor {
 	
 	public override void OnInspectorGUI ()
 	{
+		//base.OnInspectorGUI();
+
+
 		BuildHandler buildHandler = (BuildHandler) target;
 
 		buildHandler.GridShowMod = (BuildHandler.BuildGridShowMod)EditorGUILayout.EnumPopup("Grid show mod", buildHandler.GridShowMod);
@@ -20,5 +23,6 @@ public class BuildHandlerEditor : Editor {
 
 		buildHandler.SpacingCountX = EditorGUILayout.IntField("Spacing count X", buildHandler.SpacingCountX);
 		buildHandler.SpacingCountY = EditorGUILayout.IntField("Spacing count Y", buildHandler.SpacingCountY);
+
 	}
 }

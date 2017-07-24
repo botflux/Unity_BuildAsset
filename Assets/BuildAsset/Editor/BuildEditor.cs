@@ -8,6 +8,8 @@ public class BuildEditor : Editor
 {
 	public override void OnInspectorGUI ()
 	{
+		base.OnInspectorGUI();
+
 		Build build = (Build)target;
 
 		build.ApplyBuildHandlerScale = EditorGUILayout.Toggle("Apply BuildHandler scale", build.ApplyBuildHandlerScale);

@@ -11,17 +11,17 @@ public class Build : PooledObject, ICleanup
 	/// <summary>
 	/// Renseigne si oui ou non la taille du bâtiment doit être multipliée par la taille du BuidHandler.
 	/// </summary>
-	private bool applyBuildHandlerScale = false;
+	public bool applyBuildHandlerScale = false;
 
 	/// <summary>
 	/// Renseigne si oui ou non une couleur aléatoire doit être appliquée sur l'instance du bâtiment.
 	/// </summary>
-	private bool useRandomColor = true;
+	public bool useRandomColor = true;
 
 	/// <summary>
 	/// La taille du collider de ce bâtiment.
 	/// </summary>
-	private Vector3 size;
+	public Vector3 size;
 
 	/// <summary>
 	/// Coordonnée en X du bâtiment dans sa grille.

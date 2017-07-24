@@ -20,7 +20,7 @@ public class BuildHandler : MonoBehaviour
 		}
 		set
 		{
-			buildGridShowMod = value;
+			this.buildGridShowMod = value;
 		}
 	}
 
@@ -36,7 +36,7 @@ public class BuildHandler : MonoBehaviour
 		}
 		set 
 		{
-			useSecureSizes = value;
+			this.useSecureSizes = value;
 		}
 	}
 
@@ -52,7 +52,7 @@ public class BuildHandler : MonoBehaviour
 		}
 		set 
 		{
-			spacingCountX = value;
+			this.spacingCountX = value;
 		}
 	}
 
@@ -68,7 +68,7 @@ public class BuildHandler : MonoBehaviour
 		}
 		set 
 		{
-			spacingCountY = value;
+			this.spacingCountY = value;
 		}
 	}
 
@@ -84,7 +84,7 @@ public class BuildHandler : MonoBehaviour
 		}
 		set 
 		{
-			gizmosGridColor = value;
+			this.gizmosGridColor = value;
 		}
 	}
 
@@ -93,11 +93,13 @@ public class BuildHandler : MonoBehaviour
 	/// </summary>
 	public enum BuildGridShowMod {Gizmos, None};
 
+	[SerializeField]
 	/// <summary>
 	/// Le type d'affichage de la grille.
 	/// </summary>
 	private BuildGridShowMod buildGridShowMod = BuildGridShowMod.None;
 
+	[SerializeField]
     [Tooltip ("Renseigne si oui ou non, une vérification doit être effectuée avant la création d'un bâtiment")]
     /// <summary>
     /// Renseigne si oui ou non il faut effectuer une vérification de la taille
@@ -105,18 +107,21 @@ public class BuildHandler : MonoBehaviour
     /// </summary>
 	private bool useSecureSizes = false;
 
+	[SerializeField]
 	[Tooltip ("Number of cut in X-axis")]
 	/// <summary>
 	/// Nombre de colonnes.
 	/// </summary>
 	private int spacingCountX = 10;
 
+	[SerializeField]
 	[Tooltip ("Number of cut in Y-axis")]
 	/// <summary>
 	/// Nombre de lignes.
 	/// </summary>
 	private int spacingCountY = 10;
 
+	[SerializeField]
 	/// <summary>
 	/// La couleur de la grille.
 	/// </summary>
@@ -357,6 +362,11 @@ public class BuildHandler : MonoBehaviour
 	/// <param name="buildPosition">La position à laquelle le bâtiment sera instancié.</param>
 	public void CreateBuild (Build buildToCreate, Vector3 buildPosition)
 	{
+		if (buildToCreate.Size.x <= 0 && buildToCreate.Size.y <= 0 && buildToCreate.Size.z <= 0)
+		{
+			throw new System.InvalidOperationException("Build hasn't correct size: " + buildToCreate.Size);
+		}
+
 		// position aligné à la grille.
 		Vector3 snappedPosition = GetSnappedPosition(buildPosition);
 		// position local au sol aligné à la grille
