@@ -8,7 +8,7 @@ public class BuildEditor : Editor
 {
 	public override void OnInspectorGUI ()
 	{
-		base.OnInspectorGUI();
+		//base.OnInspectorGUI();
 
 		Build build = (Build)target;
 

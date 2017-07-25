@@ -8,20 +8,24 @@ using Coord = BuildAsset.Coord;
 [RequireComponent (typeof(Collider))]
 public class Build : PooledObject, ICleanup
 {
+
+	[SerializeField]
 	/// <summary>
 	/// Renseigne si oui ou non la taille du bâtiment doit être multipliée par la taille du BuidHandler.
 	/// </summary>
-	public bool applyBuildHandlerScale = false;
+	private bool applyBuildHandlerScale = false;
 
+	[SerializeField]
 	/// <summary>
 	/// Renseigne si oui ou non une couleur aléatoire doit être appliquée sur l'instance du bâtiment.
 	/// </summary>
-	public bool useRandomColor = true;
+	private bool useRandomColor = true;
 
+	[SerializeField]
 	/// <summary>
 	/// La taille du collider de ce bâtiment.
 	/// </summary>
-	public Vector3 size;
+	private Vector3 size;
 
 	/// <summary>
 	/// Coordonnée en X du bâtiment dans sa grille.
