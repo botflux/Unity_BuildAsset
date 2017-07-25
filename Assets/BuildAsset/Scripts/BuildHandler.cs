@@ -308,6 +308,7 @@ public class BuildHandler : MonoBehaviour
 
 				if (item.x == location.x && item.y == location.y)
 				{
+					Debug.Log ("Occupied");
 					return true;
 				}	
 			}	
@@ -327,8 +328,9 @@ public class BuildHandler : MonoBehaviour
 		{
 			if (!IsInCellule (locations[i]))
 			{
+				Debug.Log ("Not in cellule");
 				return false;
-			}	
+			}
 		}
 
 		return true;
@@ -371,8 +373,15 @@ public class BuildHandler : MonoBehaviour
 		Vector3 snappedPosition = GetSnappedPosition(buildPosition);
 		// position local au sol aligné à la grille
 		Vector3 localSnappedPosition = GetSnappedPosition (buildPosition - myTransform.position);
+		Debug.Log ("Given Position: " + buildPosition);
+		Debug.Log ("Snapped Position: " + snappedPosition);
+		Debug.Log ("Local Snapped Position: " + localSnappedPosition);
+
+
 		// calcul la position a la quel doit être instancié le batiment
 		Vector3 instantiatePosition = BuildUtility.GetBuildWorldPosition (snappedPosition, buildToCreate.Size);
+
+		Debug.Log ("Instantiate Position: " + instantiatePosition);
 
 		// index en x du batiment
 		// on divise la position local par la valeur du snap pour avoir un index allant de -cutCount / 2 jusqua cutCount / 2 - 1.
@@ -383,6 +392,9 @@ public class BuildHandler : MonoBehaviour
 
 		int sizeX = Mathf.RoundToInt (buildToCreate.Size.x / snapValues.x);
 		int sizeY = Mathf.RoundToInt (buildToCreate.Size.z / snapValues.y);
+
+		Debug.Log ("LocX: " + locX + " LocZ: " + locZ);
+		Debug.Log ("SizeX: " + sizeX + " SizeY" + sizeY);
 
         // en cas de non association parfaite possible entre la taille du prefab et la snapValues alors on arrêtera la création.
         if (useSecureSizes && (buildToCreate.Size.x % snapValues.x != 0 || buildToCreate.Size.z % snapValues.y != 0))

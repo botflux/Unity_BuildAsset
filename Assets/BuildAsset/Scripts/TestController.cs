@@ -40,6 +40,7 @@ public class TestController : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
 			{
+				Debug.Log ("Ray hit point :" + hit.point.x + "," + hit.point.y + "," + hit.point.z);
 				buildHandler.CreateBuild (builds[selectedBuildIndex], hit.point);
 			}
 		}

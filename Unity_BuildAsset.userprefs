@@ -1,11 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\BuildAsset\Editor\BuildEditor.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\BuildAsset\Scripts\BuildUtility.cs">
     <Files>
-      <File FileName="Assets\BuildAsset\Scripts\BuildHandler.cs" Line="124" Column="18" />
+      <File FileName="Assets\BuildAsset\Scripts\BuildHandler.cs" Line="382" Column="104" />
       <File FileName="Assets\BuildAsset\Editor\BuildHandlerEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets\BuildAsset\Scripts\Build.cs" Line="34" Column="2" />
+      <File FileName="Assets\BuildAsset\Scripts\Build.cs" Line="28" Column="2" />
       <File FileName="Assets\BuildAsset\Editor\BuildEditor.cs" Line="11" Column="5" />
+      <File FileName="Assets\BuildAsset\Scripts\BuildUtility.cs" Line="77" Column="62" />
+      <File FileName="Assets\BuildAsset\Scripts\TestController.cs" Line="45" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -72,9 +72,10 @@ namespace BuildAsset
 		/// <param name="size">La taille du bâtiment.</param>
 		public static Vector3 GetBuildWorldPosition (Vector3 snappedPosition, Vector3 size)
 		{
-			//return (snappedPosition + (snappedPosition + size)) / 2f;
-
-            return new Vector3((snappedPosition.x + (snappedPosition.x + size.x)) / 2f, size.y / 2f, (snappedPosition.z + (snappedPosition.z + size.z)) / 2f);
+			Debug.Log (snappedPosition);
+			Debug.Log ("Given size:" + size);
+			return new Vector3(snappedPosition.x + (size.x / 2f), size.y / 2f, snappedPosition.z + (size.z / 2f));
+            //return new Vector3((snappedPosition.x + snappedPosition.x + size.x) / 2f, size.y / 2f, (snappedPosition.z + snappedPosition.z + size.z) / 2f);
 		}
 	}
 
