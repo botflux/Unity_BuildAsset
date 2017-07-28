@@ -376,10 +376,13 @@ public class BuildHandler : MonoBehaviour
 		Debug.Log ("Given Position: " + buildPosition);
 		Debug.Log ("Snapped Position: " + snappedPosition);
 		Debug.Log ("Local Snapped Position: " + localSnappedPosition);
+/*
 
+		Vector3 snappedTransform = GetSnappedPosition(myTransform.position);
+		Vector3 delta = myTransform.position - snappedTransform;*/
 
 		// calcul la position a la quel doit être instancié le batiment
-		Vector3 instantiatePosition = BuildUtility.GetBuildWorldPosition (snappedPosition, buildToCreate.Size);
+		Vector3 instantiatePosition = BuildUtility.GetBuildWorldPosition (snappedPosition, buildToCreate.Size) /*+ delta*/;
 
 		Debug.Log ("Instantiate Position: " + instantiatePosition);
 
@@ -714,4 +717,7 @@ TODO: Implémenter des méthodes qui permettent d'obtenir des valeurs liées aux
 TODO: Faire plusieurs options avec la possibilité de choisir soit même de changer la scale ou bien de la mettre automatiquement avec la scale du bâtiment handler
 TODO: Implémenter un debug pour l'affichage d'une grille avec les gizmos. ou bien créer une texture puis l'appliquer à la texture déjà présente
 TODO: Ajouter une pool de bâtiment
+
+
+UNE PISTE TROUVER POUR REGLER LE PROBLEME DE DECALAGE LORS CE QUE L4ON UTILISE DES POSITION FLOTTANTE
 */
