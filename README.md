@@ -1,6 +1,12 @@
-# Unity_BuildAsset
+# Smart Grid
+
+## Description
 
 Build asset is a Unity asset that allows you to place GameObject aligns to a smart grid.
 
+## Smart grid Functionality
 
-TODO: Patch issues when using grid on a non-integer position.
+- Place aligns GameObject
+- Remove GameObjects
+- Rotate GameObjects
+- Move GameObjects

@@ -349,4 +349,18 @@ public class Build : PooledObject, ICleanup
 			size.z = 0.000001f;
 		}
 	}
+
+	public override string ToString ()
+	{
+		string occupied = "";
+
+		foreach (var item in occupiedCoords) 
+		{
+			occupied += item.ToString();
+		}
+
+		return string.Format("[Build: LocationX={0}, LocationY={1}, SizeX={2}, SizeY={3}, Origin={4}, Size={5}, OccupiedCoords={6}]", LocationX, LocationY, SizeX, SizeY, Origin, Size, occupied);
+
+		//return string.Format ("[Build: LocationX={0}, LocationY={1}, SizeX={2}, SizeY={3}, Origin={4}, Size={5}, ApplyBuildHandlerScale={6}, UseRandomColor={7}]", LocationX, LocationY, SizeX, SizeY, Origin, Size, ApplyBuildHandlerScale, UseRandomColor);
+	}
 }

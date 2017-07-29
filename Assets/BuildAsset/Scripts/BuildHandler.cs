@@ -213,6 +213,11 @@ public class BuildHandler : MonoBehaviour
 		return BuildUtility.RoundPosition (nonSnapPosition, snapValues);
 	}
 
+	Vector3 GetSnappedPosition (Vector3 nonSnappedPosition, Vector3 deltaPosition)
+	{
+		return GetSnappedPosition(nonSnappedPosition) + deltaPosition;
+	}
+
 	/// <summary>
 	/// Détermine si les coordonnées passées en paramètre sont déjà occupées par un autre bâtiment.
 	/// </summary>
@@ -369,20 +374,19 @@ public class BuildHandler : MonoBehaviour
 			throw new System.InvalidOperationException("Build hasn't correct size: " + buildToCreate.Size);
 		}
 
+		Vector3 snappedTransform = GetSnappedPosition(myTransform.position);
+		Vector3 delta = myTransform.position - snappedTransform;
+
 		// position aligné à la grille.
-		Vector3 snappedPosition = GetSnappedPosition(buildPosition);
+		Vector3 snappedPosition = GetSnappedPosition(buildPosition, delta);
 		// position local au sol aligné à la grille
-		Vector3 localSnappedPosition = GetSnappedPosition (buildPosition - myTransform.position);
+		Vector3 localSnappedPosition = GetSnappedPosition (buildPosition - myTransform.position, delta);
 		Debug.Log ("Given Position: " + buildPosition);
 		Debug.Log ("Snapped Position: " + snappedPosition);
 		Debug.Log ("Local Snapped Position: " + localSnappedPosition);
-/*
-
-		Vector3 snappedTransform = GetSnappedPosition(myTransform.position);
-		Vector3 delta = myTransform.position - snappedTransform;*/
 
 		// calcul la position a la quel doit être instancié le batiment
-		Vector3 instantiatePosition = BuildUtility.GetBuildWorldPosition (snappedPosition, buildToCreate.Size) /*+ delta*/;
+		Vector3 instantiatePosition = BuildUtility.GetBuildWorldPosition (snappedPosition, buildToCreate.Size)/* + delta*/;
 
 		Debug.Log ("Instantiate Position: " + instantiatePosition);
 
@@ -439,6 +443,8 @@ public class BuildHandler : MonoBehaviour
             // je fais cette manipulation après l'instantiation car sinon le build aura en plus de la scale, celle du transform de cet objet
             // ce qui risque de poser de gros problèmes.
             instantiatedBuild.buildTransform.SetParent(myTransform);
+
+			Debug.Log(instantiatedBuild.ToString());
 		}
 	}
 
