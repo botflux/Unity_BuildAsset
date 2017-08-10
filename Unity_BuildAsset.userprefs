@@ -2,12 +2,12 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\BuildAsset\Scripts\BuildHandler.cs">
     <Files>
-      <File FileName="Assets\BuildAsset\Scripts\BuildHandler.cs" Line="722" Column="102" />
+      <File FileName="Assets\BuildAsset\Scripts\BuildHandler.cs" Line="722" Column="89" />
       <File FileName="Assets\BuildAsset\Editor\BuildHandlerEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets\BuildAsset\Scripts\Build.cs" Line="28" Column="2" />
-      <File FileName="Assets\BuildAsset\Editor\BuildEditor.cs" Line="11" Column="5" />
-      <File FileName="Assets\BuildAsset\Scripts\BuildUtility.cs" Line="77" Column="62" />
-      <File FileName="Assets\BuildAsset\Scripts\TestController.cs" Line="45" Column="5" />
+      <File FileName="Assets\BuildAsset\Scripts\Build.cs" Line="1" Column="1" />
+      <File FileName="Assets\BuildAsset\Editor\BuildEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\BuildAsset\Scripts\BuildUtility.cs" Line="1" Column="1" />
+      <File FileName="Assets\BuildAsset\Scripts\TestController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
