@@ -678,24 +678,24 @@ public class BuildHandler : MonoBehaviour
 	{
 		if (buildGridShowMod == BuildGridShowMod.Gizmos)
 		{
-			Transform tr = (Application.isPlaying && myTransform != null)? myTransform: transform;
+			if (myTransform == null) myTransform = transform;
 
 			Gizmos.color = this.gizmosGridColor;
-			Vector3 bottomLeftCorner = tr.position - (colliderSize / 2f);
+			Vector3 bottomLeftCorner = myTransform.position - (colliderSize / 2f);
 
-			for (int i = 1; i < spacingCountX; i++) 
+			for (int i = 0; i <= spacingCountX; i++) 
 			{
-				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 ((i * snapValues.x), tr.position.y + 0.01f, 0);
-				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 ((i * snapValues.x), tr.position.y + 0.01f, colliderSize.z);
+				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 ((i * snapValues.x), myTransform.position.y + 0.01f, 0);
+				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 ((i * snapValues.x), myTransform.position.y + 0.01f, colliderSize.z);
 			
 
 				Gizmos.DrawLine (currentFromPoint, currentLastPoint);
 			}
 
-			for (int i = 1; i < spacingCountY; i++) 
+			for (int i = 0; i <= spacingCountY; i++) 
 			{
-				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 (0f, tr.position.y + 0.01f, i * snapValues.y);
-				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (colliderSize.x, tr.position.y + 0.01f, i * snapValues.y);
+				Vector3 currentFromPoint = bottomLeftCorner + new Vector3 (0f, myTransform.position.y + 0.01f, i * snapValues.y);
+				Vector3 currentLastPoint = bottomLeftCorner + new Vector3 (colliderSize.x, myTransform.position.y + 0.01f, i * snapValues.y);
 
 				Gizmos.DrawLine (currentFromPoint, currentLastPoint);
 			}
